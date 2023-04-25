@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcCoreCacheRedisProductos.Models.Producto>
+
+@{
+    ViewData["Title"] = "Favoritos";
+}
+
+<h1>Favoritos</h1>
+
+@if(Model != null)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdProducto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Imagen)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        <img style="width:100px;height:100px" src="@item.Imagen" />
+                    </td>
+                    <td>
+                        <a asp-action="DeleteFavorito"
+                   asp-controller="Productos"
+                   asp-route-idproducto="@item.IdProducto">ELIMINAR FAVORITO</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <h1 style="color:blue">No hay products favoritos</h1>
+}
+
+
